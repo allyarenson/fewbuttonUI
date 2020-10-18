@@ -73,7 +73,7 @@ function selectUp() {
 	if (selected == null) {
 		selectItem("#keyMode1")
 	} else if (selected == buttonOrder[0] || selected == buttonOrder[1] || selected == buttonOrder[2] || selected == buttonOrder[3]) {
-		selectItem("#keyMode")
+		selectItem("#keyMode1")
 	} else {
 		index = buttonOrder.indexOf(selected);
 		index = (index - 4);
