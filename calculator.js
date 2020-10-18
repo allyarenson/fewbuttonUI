@@ -88,7 +88,7 @@ function selectDown() {
 	selected = getSelectedItem();
 	if (selected == null) {
 		selectItem("#keyMode1")
-	} else if (selected == "keyMode1") {
+	} else if (selected == "#keyMode1") {
 		selectItem(buttonOrder[0])
 	} else {
 		index = buttonOrder.indexOf(selected);
