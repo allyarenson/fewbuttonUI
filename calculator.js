@@ -139,10 +139,12 @@ $(document).keyup(function(event) {
 
 $("#keyMode1").click(function(event) {
 	oneKeyMode = false;
+	property.style.backgroundColor = "#e861a7"
 })
 
 $("#keyMode2").click(function(event) {
 	oneKeyMode = true;
+	property.style.backgroundColor = "#e861a7"
 })
 
 
