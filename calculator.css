@@ -26,5 +26,3 @@ label {
 }
 
 .navButton{ font-size: x-large; background: orange; padding: 10px; color: white; border: 2px solid white; font-family: ocr-a, consolas, monospaced; font-weight: bold; margin: 5px;}
-.navButton.active{ font-size: x-large; background: pink; padding: 10px; color: white; border: 2px solid white; font-family: ocr-a, consolas, monospaced; font-weight: bold; margin: 5px;}
-
