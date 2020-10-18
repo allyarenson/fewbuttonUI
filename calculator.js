@@ -1,12 +1,13 @@
 // this gives us the order of the buttons, which we can use to step through the buttons in various directions
 // since we know the layout, + 1 moves to the next item, -1 previous, +4 is one row down, -4 is one row up
 buttonOrder = ["#button7","#button8","#button9","#buttonDivide","#button4","#button5","#button6","#buttonMultiply","#button1","#button2","#button3","#buttonAdd","#button0","#buttonClear","#buttonEquals","#buttonSubtract"];
-
+var oneKeyMode = false;
 // add the selected class to an item. you can pass this any jquery selector, such as #id or .class
 // calling this will de-select anything currently selected
+
 function selectItem(name) {
 	$("button").removeClass("cursor");
-	$(name).addClass("cursor")
+	$(name).addClass("cursor");
 }
 
 // gets the currently selected item, and returns its #id
@@ -19,7 +20,7 @@ function getSelectedItem() {
 		return null;
 	}
 	else {
-		return "#" + selected.first().attr('id')
+		return "#" + selected.first().attr('id');
 	} 
 }
 
@@ -36,46 +37,59 @@ function getSelectedItem() {
 function selectNext() {
 	selected = getSelectedItem()
 	if (selected == null) {
-		selectItem(buttonOrder[0]);
+		selectItem("#keyMode");
+	} else if (selected == "#keyMode"){
+		selectItem(buttonOrder[0])
+	} else if (selected == "#buttonSubtract") {
+		selectItem("#keyMode")
 	} else {
 		index = buttonOrder.indexOf(selected);
-		index = (index + 1) % buttonOrder.length;
-		selectItem(buttonOrder[index])
+		index = (index + 1);
+		selectItem(buttonOrder[index]);
 	}
 }
 
 function selectPrevious() {
-	selected = getSelectedItem()
+	selected = getSelectedItem();
 	if (selected == null) {
-		selectItem(buttonOrder[0]);
+		selectItem("#keyMode")
+	} else if (selected =="#keyMode") {
+		selectItem("#buttonSubtract")
+	} else if (selected == buttonOrder[0]) {
+		selectItem("#keyMode")
 	} else {
 		index = buttonOrder.indexOf(selected);
 		index = (index - 1);
-		if (index < 0) index = buttonOrder.length + index
-		selectItem(buttonOrder[index])
+		selectItem(buttonOrder[index]);
 	}	
 }
 
 function selectUp() {
-	selected = getSelectedItem()
+	selected = getSelectedItem();
 	if (selected == null) {
-		selectItem(buttonOrder[0]);
+		selectItem("#keyMode")
+	} else if (selected == buttonOrder[0] || selected == buttonOrder[1] || selected == buttonOrder[2] || selected == buttonOrder[3]) {
+		selectItem("#keyMode")
 	} else {
 		index = buttonOrder.indexOf(selected);
 		index = (index - 4);
-		if (index < 0) index = buttonOrder.length + index
-		selectItem(buttonOrder[index])
+		if (index < 0) {
+			index = buttonOrder.length + index;
+		}
+		selectItem(buttonOrder[index]);
 	}
 }
 
 function selectDown() {
-	selected = getSelectedItem()
+	selected = getSelectedItem();
 	if (selected == null) {
-		selectItem(buttonOrder[0]);
+		selectItem("#keyMode")
+	} else if (selected == "keyMode") {
+		selectItem(buttonOrder[0])
 	} else {
 		index = buttonOrder.indexOf(selected);
 		index = (index + 4) % buttonOrder.length;
-		selectItem(buttonOrder[index])
+		selectItem(buttonOrder[index]);
 	}
 }
 
@@ -84,19 +98,89 @@ function selectDown() {
 // if multiple items are selected, this selects the first
 function clickSelectedItem() {
 	whichButton = getSelectedItem();
-	if (whichButton != null) {
+	if(whichButton == "#keyMode"){
+		$(whichButton).click();
+		setTimeout(() => { return; }, 1000);
+	} else if(whichButton != null) {
+		
 		$(whichButton).click();
 	}
 }
 
+
 // this function responds to user key presses
 // you'll rewrite this to control your interface using some number of keys
-$(document).keypress(function(event) {
-	if (event.key == "a") {
-		alert("You pressed the 'a' key!")	
-	} else if (event.key == "b") {
-		alert("You pressed the 'b' key!")
+$(document).keyup(function(event) {
+	if(!oneKeyMode){
+		if(event.key == "ArrowRight") {
+			selectNext()
+		} else if(event.key == "ArrowLeft") {
+			selectPrevious()
+		} else if(event.key == "ArrowUp") {
+			selectUp()
+		} else if(event.key == "ArrowDown") {
+			selectDown()
+		} else if(event.key == "Shift") {
+			clickSelectedItem()
+		}
 	}
+	else{
+		if(event.key == "Shift"){
+			selectNext()
+		}
+	}
+	
+})
+
+
+$("#keyMode").click(function(event) {
+	if(oneKeyMode){
+		oneKeyMode = false
+		$("#keyMode").html("Use 1 Key Input Mode");
+	} else {
+		oneKeyMode = true
+		$("#keyMode").html("Use 5 Key Input Mode");
+	}
+})
+
+
+timer = null;
+
+$(document).on('keydown', function(event) {
+    // Check if timer is already running.
+    event.preventDefault();
+    if(event.repeat){
+    	return;
+    }
+    if(timer !== null) return;
+    // Start new timer.
+    timer = window.setTimeout(function() {
+      // Trigger longKeyPress event on the currently selected element when the timer finishes.
+      $(event.target).trigger({
+        type: 'longKeyPress',
+        key: event.key,
+        keyCode: event.keyCode,
+        which: event.which
+      });
+    }, 1000);
+ })
+  
+ $(document).on('keyup', function(event) {
+    if(timer === null) return;
+    
+    // Clear running timer.
+    window.clearTimeout(timer);
+    timer = null;
+})
+
+$(document).on('longKeyPress', function(event) {
+	if(event.repeat){
+    	return;
+    }
+    if(event.key == "Shift"){
+
+     	clickSelectedItem();
+    }
 })
 
 
