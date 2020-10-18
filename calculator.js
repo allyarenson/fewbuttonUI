@@ -39,11 +39,11 @@ function selectNext() {
 	if (selected == null) {
 		selectItem("#keyMode1");
 	} else if (selected == "#keyMode1"){
-		selectItem("keyMode2")
+		selectItem("#keyMode2")
 	} else if (selected == "#keyMode2"){
 		selectItem(buttonOrder[0])
 	} else if (selected == "#buttonSubtract") {
-		selectItem("#keyMode")
+		selectItem("#keyMode1")
 	} else {
 		index = buttonOrder.indexOf(selected);
 		index = (index + 1);
