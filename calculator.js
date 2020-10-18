@@ -37,8 +37,10 @@ function getSelectedItem() {
 function selectNext() {
 	selected = getSelectedItem()
 	if (selected == null) {
-		selectItem("#keyMode");
-	} else if (selected == "#keyMode"){
+		selectItem("#keyMode1");
+	} else if (selected == "#keyMode1"){
+		selectItem("keyMode2")
+	} else if (selected == "#keyMode2"){
 		selectItem(buttonOrder[0])
 	} else if (selected == "#buttonSubtract") {
 		selectItem("#keyMode")
@@ -52,11 +54,13 @@ function selectNext() {
 function selectPrevious() {
 	selected = getSelectedItem();
 	if (selected == null) {
-		selectItem("#keyMode")
-	} else if (selected =="#keyMode") {
+		selectItem("#keyMode1")
+	} else if (selected =="#keyMode1") {
 		selectItem("#buttonSubtract")
+	} else if (selected == "#keyMode2"){
+		selectItem("#keyMode1")
 	} else if (selected == buttonOrder[0]) {
-		selectItem("#keyMode")
+		selectItem("#keyMode2")
 	} else {
 		index = buttonOrder.indexOf(selected);
 		index = (index - 1);
@@ -67,7 +71,7 @@ function selectPrevious() {
 function selectUp() {
 	selected = getSelectedItem();
 	if (selected == null) {
-		selectItem("#keyMode")
+		selectItem("#keyMode1")
 	} else if (selected == buttonOrder[0] || selected == buttonOrder[1] || selected == buttonOrder[2] || selected == buttonOrder[3]) {
 		selectItem("#keyMode")
 	} else {
@@ -83,8 +87,8 @@ function selectUp() {
 function selectDown() {
 	selected = getSelectedItem();
 	if (selected == null) {
-		selectItem("#keyMode")
-	} else if (selected == "keyMode") {
+		selectItem("#keyMode1")
+	} else if (selected == "keyMode1") {
 		selectItem(buttonOrder[0])
 	} else {
 		index = buttonOrder.indexOf(selected);
@@ -98,7 +102,7 @@ function selectDown() {
 // if multiple items are selected, this selects the first
 function clickSelectedItem() {
 	whichButton = getSelectedItem();
-	if(whichButton == "#keyMode"){
+	if(whichButton == "#keyMode1"){
 		$(whichButton).click();
 		setTimeout(() => { return; }, 1000);
 	} else if(whichButton != null) {
@@ -133,15 +137,14 @@ $(document).keyup(function(event) {
 })
 
 
-$("#keyMode").click(function(event) {
-	if(oneKeyMode){
-		oneKeyMode = false
-		$("#keyMode").html("Use 1 Key Input Mode");
-	} else {
-		oneKeyMode = true
-		$("#keyMode").html("Use 5 Key Input Mode");
-	}
+$("#keyMode1").click(function(event) {
+	oneKeyMode = false;
 })
+
+$("#keyMode2").click(function(event) {
+	oneKeyMode = true;
+})
+
 
 
 timer = null;
