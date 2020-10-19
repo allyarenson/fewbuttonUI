@@ -138,12 +138,12 @@ $(document).keyup(function(event) {
 
 
 $("#keyMode1").click(function(event) {
-	oneKeyMode = false;
+	oneKeyMode = true;
 		
 })
 
 $("#keyMode2").click(function(event) {
-	oneKeyMode = true;
+	oneKeyMode = false;
 		
 })
 
