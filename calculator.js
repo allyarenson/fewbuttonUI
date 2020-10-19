@@ -137,11 +137,11 @@ $(document).keyup(function(event) {
 
 
 $("#keyMode1").click(function(event) {
-	onKeyMode = false;
+	onKeyMode = true;
 })
 
 $("#keyMode2").click(function(event) {
-	oneKeyMode = true;   
+	oneKeyMode = false;   
 })
 
 
