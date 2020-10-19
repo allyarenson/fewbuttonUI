@@ -102,7 +102,7 @@ function selectDown() {
 // if multiple items are selected, this selects the first
 function clickSelectedItem() {
 	whichButton = getSelectedItem();
-	if(whichButton == "#keyMode1"){
+	if(whichButton == "#keyMode2"){
 		$(whichButton).click();
 		setTimeout(() => { return; }, 1000);
 	} else if(whichButton != null) {
