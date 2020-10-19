@@ -39,8 +39,6 @@ function selectNext() {
 	if (selected == null) {
 		selectItem("#keyMode1");
 	} else if (selected == "#keyMode1"){
-		selectItem("#keyMode2")
-	} else if (selected == "#keyMode2"){
 		selectItem(buttonOrder[0])
 	} else if (selected == "#buttonSubtract") {
 		selectItem("#keyMode1")
@@ -57,10 +55,8 @@ function selectPrevious() {
 		selectItem("#keyMode1")
 	} else if (selected =="#keyMode1") {
 		selectItem("#buttonSubtract")
-	} else if (selected == "#keyMode2"){
-		selectItem("#keyMode1")
 	} else if (selected == buttonOrder[0]) {
-		selectItem("#keyMode2")
+		selectItem("#keyMode1")
 	} else {
 		index = buttonOrder.indexOf(selected);
 		index = (index - 1);
@@ -88,7 +84,7 @@ function selectDown() {
 	selected = getSelectedItem();
 	if (selected == null) {
 		selectItem("#keyMode1")
-	} else if (selected == "#keyMode1") {
+	} else if (selected == "keyMode1") {
 		selectItem(buttonOrder[0])
 	} else {
 		index = buttonOrder.indexOf(selected);
@@ -105,10 +101,8 @@ function clickSelectedItem() {
 	if(whichButton == "#keyMode1"){
 		$(whichButton).click();
 		setTimeout(() => { return; }, 1000);
-	} else if(whichButton == "#keyMode2"){
-		$(whichButton).click();
-		setTimeout(() => { return; }, 1000);
 	} else if(whichButton != null) {
+		
 		$(whichButton).click();
 	}
 }
@@ -140,13 +134,14 @@ $(document).keyup(function(event) {
 
 
 $("#keyMode1").click(function(event) {
-	onKeyMode = false;
+	if(oneKeyMode){
+		oneKeyMode = false
+		$("#keyMode1").html("Use 1 Key Input Mode");
+	} else {
+		oneKeyMode = true
+		$("#keyMode1").html("Use 5 Key Input Mode");
+	}
 })
-
-$("#keyMode2").click(function(event) {
-	oneKeyMode = true;   
-})
-
 
 
 timer = null;
@@ -170,7 +165,7 @@ $(document).on('keydown', function(event) {
     }, 1000);
  })
   
-$(document).on('keyup', function(event) {
+ $(document).on('keyup', function(event) {
     if(timer === null) return;
     
     // Clear running timer.
@@ -180,11 +175,12 @@ $(document).on('keyup', function(event) {
 
 $(document).on('longKeyPress', function(event) {
 	if(event.repeat){
-    		return;
-    	}
-    	if(event.key == "Shift"){
-     		clickSelectedItem();
-    	}
+    	return;
+    }
+    if(event.key == "Shift"){
+
+     	clickSelectedItem();
+    }
 })
 
 
