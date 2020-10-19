@@ -38,7 +38,9 @@ function selectNext() {
 	selected = getSelectedItem()
 	if (selected == null) {
 		selectItem("#keyMode1");
-	} else if (selected == "#keyMode1"){
+	} else if (selected == "#keyMode1") {
+		selectItem("#keyMode2")
+	} else if (selected == "#keyMode2"){
 		selectItem(buttonOrder[0])
 	} else if (selected == "#buttonSubtract") {
 		selectItem("#keyMode1")
@@ -56,6 +58,8 @@ function selectPrevious() {
 	} else if (selected =="#keyMode1") {
 		selectItem("#buttonSubtract")
 	} else if (selected == buttonOrder[0]) {
+		selectItem("#keyMode2")
+	} else if (selected == "#keyMode2") {
 		selectItem("#keyMode1")
 	} else {
 		index = buttonOrder.indexOf(selected);
@@ -134,13 +138,13 @@ $(document).keyup(function(event) {
 
 
 $("#keyMode1").click(function(event) {
-	if(oneKeyMode){
-		oneKeyMode = false
-		$("#keyMode1").html("Use 1 Key Input Mode");
-	} else {
-		oneKeyMode = true
-		$("#keyMode1").html("Use 5 Key Input Mode");
-	}
+	oneKeyMode = false;
+		
+})
+
+$("#keyMode2").click(function(event) {
+	oneKeyMode = true;
+		
 })
 
 
