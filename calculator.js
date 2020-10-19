@@ -105,6 +105,9 @@ function clickSelectedItem() {
 	if(whichButton == "#keyMode1"){
 		$(whichButton).click();
 		setTimeout(() => { return; }, 1000);
+	} else if(whichButton == "#keyMode2"){
+		$(whichButton).click();
+		setTimeout(() => { return; }, 1000);
 	} else if(whichButton != null) {
 		$(whichButton).click();
 	}
@@ -137,11 +140,11 @@ $(document).keyup(function(event) {
 
 
 $("#keyMode1").click(function(event) {
-	onKeyMode = true;
+	onKeyMode = false;
 })
 
 $("#keyMode2").click(function(event) {
-	oneKeyMode = false;   
+	oneKeyMode = true;   
 })
 
 
