@@ -138,13 +138,23 @@ $(document).keyup(function(event) {
 
 
 $("#keyMode1").click(function(event) {
-	oneKeyMode = false;
-	property.style.backgroundColor = "#e861a7"
+	if(clicked){
+        	$(this).css('background-color', #e861a7);
+        	clicked  = false;
+		oneKeyMode = false;
+    	} else {
+        	clicked  = true;
+    	}   
 })
 
 $("#keyMode2").click(function(event) {
-	oneKeyMode = true;
-	property.style.backgroundColor = "#e861a7"
+	if(clicked){
+        	$(this).css('background-color', #e861a7);
+        	clicked  = false;
+		oneKeyMode = true;
+    	} else {
+        	clicked  = true;
+    	}   
 })
 
 
