@@ -106,7 +106,6 @@ function clickSelectedItem() {
 		$(whichButton).click();
 		setTimeout(() => { return; }, 1000);
 	} else if(whichButton != null) {
-		
 		$(whichButton).click();
 	}
 }
@@ -168,7 +167,7 @@ $(document).on('keydown', function(event) {
     }, 1000);
  })
   
- $(document).on('keyup', function(event) {
+$(document).on('keyup', function(event) {
     if(timer === null) return;
     
     // Clear running timer.
@@ -178,12 +177,11 @@ $(document).on('keydown', function(event) {
 
 $(document).on('longKeyPress', function(event) {
 	if(event.repeat){
-    	return;
-    }
-    if(event.key == "Shift"){
-
-     	clickSelectedItem();
-    }
+    		return;
+    	}
+    	if(event.key == "Shift"){
+     		clickSelectedItem();
+    	}
 })
 
 
